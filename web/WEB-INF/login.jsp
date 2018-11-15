@@ -18,5 +18,8 @@
             password: <input type="password" required name="password"><br>
             <input type="submit" value="Submit">
         </form>
+        <div>
+            <a href="forgot" >Forgot Password</a>
+        </div>
     </body>
 </html>

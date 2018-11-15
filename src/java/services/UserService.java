@@ -45,4 +45,9 @@ public class UserService {
         user.setEmail(email);
         return userDB.insert(user);
     }
+    
+    public User getByEmail(String email) {
+        User u = userDB.getUserByEmail(email);
+        return u;
+    }
 }

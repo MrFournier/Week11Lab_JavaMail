@@ -18,9 +18,14 @@ import sun.util.logging.PlatformLogger;
  */
 public class AccountService {
 
+    UserDB userDB;
+    
+    public AccountService() {
+        UserDB userDB = new UserDB();
+    }
+    
     public User login(String username, String password, String path) {
         try {
-            UserDB userDB = new UserDB();
             User user = userDB.getUser(username);
 
             if (user.getPassword().equals(password)) {
@@ -48,5 +53,24 @@ public class AccountService {
         }
 
         return null;
+    }
+    
+    public boolean forgotPassword(String email, String path) {
+        
+        UserService us = new UserService();
+        
+        User user = us.getByEmail(email);
+        
+        HashMap<String, String> tagsMap = new HashMap();
+        
+        tagsMap.put("username", user.getUsername());
+        tagsMap.put("firstname", user.getFirstname());
+        tagsMap.put("lastname", user.getLastname());
+        
+        
+        GmailService.sendMail(email, "Email Reset", path, tagsMap);
+        
+        
+        return false;
     }
 }
