@@ -86,13 +86,20 @@ public class AccountService {
         
         user.setResetPasswordUUID(uuid);
         
+        try {
+            us.update(user.getUsername(), user.getPassword(), user.getFirstname(), user.getLastname(), user.getEmail(), user.getResetPasswordUUID());
+        } catch (Exception ex) {
+            Logger.getLogger(AccountService.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
         HashMap<String, String> tagsMap = new HashMap();
         
         tagsMap.put("firstname", user.getFirstname());
         tagsMap.put("lastname", user.getLastname());
         tagsMap.put("link", link);
         
-        GmailService.sendMail(email, "Email Reset", path, tagsMap);
+        GmailService.sendMail(email, "Password Reset", path, tagsMap);
         
         return true;
     }

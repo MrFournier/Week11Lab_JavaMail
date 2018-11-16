@@ -31,7 +31,8 @@ public class ResetPasswordServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        if(request.getParameter("UUID") != null) {
+        if(request.getParameter("uuid") != null) {
+            request.setAttribute("uuid", request.getParameter("uuid"));
             getServletContext().getRequestDispatcher("/WEB-INF/resetNewPassword.jsp").forward(request, response);
             return;
         }
@@ -53,7 +54,18 @@ public class ResetPasswordServlet extends HttpServlet {
         
         AccountService ass = new AccountService();
         
-        if(ass.resetPassword(request.getParameter("emailAddress"), getServletContext().getRealPath("/WEB-INF/emailtemplates/resetPassword.html"), request.getRequestURL().toString())) {
+        if(request.getParameter("newPass") != null) {
+           if(ass.changePassword(request.getParameter("resetUUID"), (String) request.getParameter("newPassword"))) {
+               request.setAttribute("message", "Password has been reset");
+           } else {
+               request.setAttribute("message", "Failed to reset password.");
+           }
+           
+           getServletContext().getRequestDispatcher("/WEB-INF/resetNewPassword.jsp").forward(request, response);
+           return;
+        }
+        
+        if(ass.resetPassword(request.getParameter("emailAddress"), getServletContext().getRealPath("/WEB-INF/emailtemplates/resetpassword.html"), request.getRequestURL().toString())) {
             request.setAttribute("message", "Recovery email sent.");
         } else {
             request.setAttribute("message", "No user with that email address");

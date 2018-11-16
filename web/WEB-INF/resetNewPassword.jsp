@@ -14,9 +14,12 @@
     <body>
         <h1>Enter a new password</h1>
         <form action="reset?newPass" method="POST">
-            <input type="hidden" name="resetUUID" value="" >
+            <input type="hidden" name="resetUUID" value="${uuid}" >
             <input type="text" name="newPassword" >
             <input type="submit" value="Submit" >
         </form>
+        <div>
+            ${message}
+        </div>
     </body>
 </html>

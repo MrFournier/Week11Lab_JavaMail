@@ -20,15 +20,16 @@ public class UserService {
         return userDB.getAll();
     }
 
-    public int update(String username, String password, String firstname, String lastname, String email) throws Exception {
+    public int update(String username, String password, String firstname, String lastname, String email, String uuid) throws Exception {
         User user = get(username);
         user.setPassword(password);
         user.setFirstname(firstname);
         user.setLastname(lastname);
         user.setEmail(email);
+        user.setResetPasswordUUID(uuid);
         return userDB.update(user);
     }
-
+    
     public int delete(String username) throws Exception {
         User deletedUser = userDB.getUser(username);
         // do not allow the admin to be deleted

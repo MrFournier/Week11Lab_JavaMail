@@ -97,7 +97,7 @@ public class UserDB {
     
     public User getUserByUUID(String uuid) {
         EntityManager em = DBUtil.getEmFactory().createEntityManager();
-        User user = em.createNamedQuery("User.findByUUID", User.class).setParameter("uuid", uuid).getSingleResult();
+        User user = em.createNamedQuery("User.findByResetPasswordUUID", User.class).setParameter("resetPasswordUUID", uuid).getSingleResult();
         return user;
     }
 }
