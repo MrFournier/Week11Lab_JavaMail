@@ -70,6 +70,6 @@ public class AccountService {
         
         GmailService.sendMail(email, "Email Reset", path, tagsMap);
         
-        return false;
+        return true;
     }
 }
