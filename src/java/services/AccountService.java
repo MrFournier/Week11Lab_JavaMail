@@ -66,10 +66,9 @@ public class AccountService {
         tagsMap.put("username", user.getUsername());
         tagsMap.put("firstname", user.getFirstname());
         tagsMap.put("lastname", user.getLastname());
-        
+        tagsMap.put("password", user.getPassword());
         
         GmailService.sendMail(email, "Email Reset", path, tagsMap);
-        
         
         return false;
     }
