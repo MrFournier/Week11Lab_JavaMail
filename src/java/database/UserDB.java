@@ -94,4 +94,10 @@ public class UserDB {
         User user = em.createNamedQuery("User.findByEmail", User.class).setParameter("email", email).getSingleResult();
         return user;
     }
+    
+    public User getUserByUUID(String uuid) {
+        EntityManager em = DBUtil.getEmFactory().createEntityManager();
+        User user = em.createNamedQuery("User.findByUUID", User.class).setParameter("uuid", uuid).getSingleResult();
+        return user;
+    }
 }

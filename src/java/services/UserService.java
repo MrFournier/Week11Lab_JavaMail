@@ -50,4 +50,9 @@ public class UserService {
         User u = userDB.getUserByEmail(email);
         return u;
     }
+    
+    public User getByUUID(String uuid) {
+        User u = userDB.getUserByUUID(uuid);
+        return u;
+    }
 }
